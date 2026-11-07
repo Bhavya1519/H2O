@@ -590,3 +590,4 @@ class _BottlePainter extends CustomPainter {
         oldDelegate.splashMultiplier != splashMultiplier;
   }
 }
+

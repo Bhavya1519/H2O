@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../dashboard/data/hydration_service.dart';
 
 /// Connection state machine for BLE scan and pairing
 enum BleConnectionStatus {
@@ -225,6 +226,12 @@ class _BleScanScreenState extends State<BleScanScreen>
       setState(() {
         _status = BleConnectionStatus.connected;
       });
+
+      // Update central hydration service with connected device telemetry
+      HydrationService().updateTelemetry(
+        deviceName: bottle.name,
+        battery: bottle.batteryPercent,
+      );
 
       // Trigger animated green pulse
       await _pulseController.forward();
