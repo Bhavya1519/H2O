@@ -40,6 +40,7 @@ class HydrationService extends ChangeNotifier {
   double _waterTempCelsius = 16.5;
   bool _isConnected = true;
   int _bottleCapacityMl = 750;
+  int _bottleCurrentWaterMl = 550;
 
   String get connectedDeviceName => _connectedDeviceName;
   String get firmwareVersion => _firmwareVersion;
@@ -47,6 +48,23 @@ class HydrationService extends ChangeNotifier {
   double get waterTempCelsius => _waterTempCelsius;
   bool get isConnected => _isConnected;
   int get bottleCapacityMl => _bottleCapacityMl;
+  int get bottleCurrentWaterMl => _bottleCurrentWaterMl;
+
+  /// Update bottle water level when a sip is recorded or mock sip occurs
+  void onBottleVolumeUpdated(int newVolumeMl) {
+    final diff = _bottleCurrentWaterMl - newVolumeMl;
+    _bottleCurrentWaterMl = newVolumeMl;
+    if (diff > 0) {
+      logIntake(diff);
+    }
+    notifyListeners();
+  }
+
+  /// Manually or automatically refill the physical bottle
+  void refillBottle() {
+    _bottleCurrentWaterMl = _bottleCapacityMl;
+    notifyListeners();
+  }
 
   // === UV-C Sterilization Feature ===
   bool _isSterilizing = false;
