@@ -37,23 +37,23 @@ class _BleScanScreenState extends State<BleScanScreen>
 
   final List<BleBottleDevice> _devices = const [
     BleBottleDevice(
-      id: 'AD-PRO-9842',
-      name: 'AuraBottle Pro',
+      id: 'H2O-PRO-9842',
+      name: 'H2O Bottle Pro',
       model: '750ml • Titanium Obsidian',
       rssi: -48,
       battery: 92,
       isPaired: true,
     ),
     BleBottleDevice(
-      id: 'AD-MINI-1104',
-      name: 'AuraHydrate Mini',
+      id: 'H2O-MINI-1104',
+      name: 'H2O Flask Mini',
       model: '500ml • Glacier Cyan',
       rssi: -72,
       battery: 64,
     ),
     BleBottleDevice(
-      id: 'AD-PRO-3321',
-      name: 'AuraBottle Pro (Living Room)',
+      id: 'H2O-PRO-3321',
+      name: 'H2O Bottle Pro (Living Room)',
       model: '750ml • Cobalt Azure',
       rssi: -84,
       battery: 88,
@@ -107,7 +107,7 @@ class _BleScanScreenState extends State<BleScanScreen>
                 SnackBar(
                   backgroundColor: AppColors.surface,
                   content: Text(
-                    'Scanning for nearby Aura bottles...',
+                    'Scanning for nearby H2O bottles...',
                     style: AppTypography.bodySmall.copyWith(
                       color: AppColors.cyanAccent,
                     ),
@@ -210,7 +210,7 @@ class _BleScanScreenState extends State<BleScanScreen>
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  'Hold your AuraBottle near your phone',
+                  'Hold your H2O Bottle near your phone',
                   style: AppTypography.bodySmall.copyWith(
                     color: AppColors.textSecondary,
                   ),
@@ -397,3 +397,4 @@ class _BleScanScreenState extends State<BleScanScreen>
     );
   }
 }
+

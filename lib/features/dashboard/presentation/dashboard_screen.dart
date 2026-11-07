@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_theme.dart';
+import 'widgets/liquid_wave_gauge.dart';
 
 /// Flagship Dashboard Screen for AuraDrop IoT Hydration Tracker.
 /// Features interactive hydration logging, live bottle metrics, and glassmorphic stats.
@@ -54,7 +55,7 @@ class _DashboardScreenState extends State<DashboardScreen>
             const Icon(Icons.water_drop, color: AppColors.cyanAccent, size: 20),
             const SizedBox(width: 10),
             Text(
-              '+$amount ml recorded from AuraBottle',
+              '+$amount ml recorded from H2O Bottle',
               style: AppTypography.bodySmall.copyWith(
                 color: AppColors.textPrimary,
                 fontWeight: FontWeight.w600,
@@ -70,7 +71,6 @@ class _DashboardScreenState extends State<DashboardScreen>
   @override
   Widget build(BuildContext context) {
     final progress = (_currentIntakeMl / _targetGoalMl).clamp(0.0, 1.0);
-    final percentage = (progress * 100).toInt();
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -142,7 +142,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
-                                  'AuraBottle Pro',
+                                  'H2O Bottle Pro',
                                   style: AppTypography.labelSmall.copyWith(
                                     color: AppColors.textPrimary,
                                     fontWeight: FontWeight.w600,
@@ -208,90 +208,13 @@ class _DashboardScreenState extends State<DashboardScreen>
                           ),
                           const SizedBox(height: 24),
 
-                          // Circular Liquid Gauge
-                          Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              // Background Track
-                              SizedBox(
-                                width: 220,
-                                height: 220,
-                                child: CircularProgressIndicator(
-                                  value: progress,
-                                  strokeWidth: 14,
-                                  backgroundColor: AppColors.surface.withValues(alpha: 0.6),
-                                  valueColor: const AlwaysStoppedAnimation<Color>(
-                                    AppColors.cyanAccent,
-                                  ),
-                                  strokeCap: StrokeCap.round,
-                                ),
-                              ),
-
-                              // Inner Metric Info
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                                    textBaseline: TextBaseline.alphabetic,
-                                    children: [
-                                      Text(
-                                        '$_currentIntakeMl',
-                                        style: AppTypography.metricValue,
-                                      ),
-                                      const SizedBox(width: 4),
-                                      const Text(
-                                        'ml',
-                                        style: AppTypography.metricUnit,
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    '$percentage% of $_targetGoalMl ml',
-                                    style: AppTypography.bodySmall.copyWith(
-                                      color: AppColors.textSecondary,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10),
-
-                                  // Water Temperature Sensor Chip
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 10,
-                                      vertical: 4,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.surface.withValues(alpha: 0.8),
-                                      borderRadius: BorderRadius.circular(12),
-                                      border: Border.all(
-                                        color: AppColors.glassBorder,
-                                      ),
-                                    ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        const Icon(
-                                          Icons.thermostat_rounded,
-                                          size: 14,
-                                          color: AppColors.skyHighlight,
-                                        ),
-                                        const SizedBox(width: 4),
-                                        Text(
-                                          '${_waterTempCelsius.toStringAsFixed(1)}°C • Cool',
-                                          style: AppTypography.labelSmall.copyWith(
-                                            color: AppColors.skyHighlight,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                          // Interactive Animated Liquid Wave Gauge
+                          LiquidWaveGauge(
+                            progress: progress,
+                            currentIntakeMl: _currentIntakeMl,
+                            targetGoalMl: _targetGoalMl,
+                            waterTempCelsius: _waterTempCelsius,
+                            size: 220,
                           ),
 
                           const SizedBox(height: 28),

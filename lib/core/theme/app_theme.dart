@@ -1,7 +1,7 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
-/// Premium, Dark-Mode-First Theme Definition for AuraDrop IoT Hydration Tracker.
+/// Premium, Dark-Mode-First Theme Definition for H2O IoT Hydration Tracker.
 ///
 /// Features:
 /// - Deep slate/obsidian palette with vibrant liquid cyan/azure & emerald accents.

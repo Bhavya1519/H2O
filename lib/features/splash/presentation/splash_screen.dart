@@ -150,11 +150,11 @@ class _SplashScreenState extends State<SplashScreen>
                       shaderCallback: (bounds) =>
                           AppColors.liquidGradient.createShader(bounds),
                       child: const Text(
-                        'AuraDrop',
+                        'H2O',
                         style: TextStyle(
-                          fontSize: 44,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: -1.0,
+                          fontSize: 54,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 2.0,
                           color: Colors.white,
                         ),
                       ),

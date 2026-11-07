@@ -4,16 +4,16 @@ import 'core/theme/app_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const AuraDropApp());
+  runApp(const H2OApp());
 }
 
-class AuraDropApp extends StatelessWidget {
-  const AuraDropApp({super.key});
+class H2OApp extends StatelessWidget {
+  const H2OApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'AuraDrop',
+      title: 'H2O',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
       routerConfig: appRouter,

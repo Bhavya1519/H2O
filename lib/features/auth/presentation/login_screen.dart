@@ -11,7 +11,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _emailController = TextEditingController(text: 'alex.rivera@auradrop.io');
+  final _emailController = TextEditingController(text: 'alex.rivera@h2o.app');
   final _passwordController = TextEditingController(text: '••••••••••••');
   bool _obscurePassword = true;
 
@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      'Welcome to AuraDrop',
+                      'Welcome to H2O',
                       style: AppTypography.headlineMedium,
                     ),
                     const SizedBox(height: 6),
@@ -270,7 +270,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   style: AppTypography.titleSmall,
                                 ),
                                 Text(
-                                  'Skip account and pair AuraBottle directly',
+                                  'Skip account and pair H2O Bottle directly',
                                   style: AppTypography.bodySmall.copyWith(
                                     color: AppColors.textMuted,
                                   ),
@@ -295,3 +295,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
