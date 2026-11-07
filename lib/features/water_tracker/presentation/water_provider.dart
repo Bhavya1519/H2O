@@ -35,6 +35,12 @@ class WaterBottleState {
   /// Total cumulative fluid volume (in mL) consumed today.
   final int todayTotalConsumedMl;
 
+  /// Daily target hydration goal in milliliters (default: 2500 mL).
+  final int dailyTargetMl;
+
+  /// Timestamp when the most recent sip was recorded.
+  final DateTime? lastSipTimestamp;
+
   const WaterBottleState({
     this.connectionStatus = BottleConnectionStatus.disconnected,
     this.currentVolumeMl = 1000,
@@ -42,6 +48,8 @@ class WaterBottleState {
     this.batteryPercent = 100,
     this.lastSipAmount = 0,
     this.todayTotalConsumedMl = 0,
+    this.dailyTargetMl = 2500,
+    this.lastSipTimestamp,
   });
 
   /// Percentage of total capacity filled with water (0.0 to 1.0).
@@ -52,6 +60,29 @@ class WaterBottleState {
   /// Fill percentage as an integer (0 to 100).
   int get fillPercentage => (fillRatio * 100).round();
 
+  /// Fraction of today's target goal accomplished (0.0 to 1.0).
+  double get dailyTargetProgress => dailyTargetMl > 0
+      ? (todayTotalConsumedMl / dailyTargetMl).clamp(0.0, 1.0)
+      : 0.0;
+
+  /// Milliliters remaining until daily target goal is reached.
+  int get remainingGoalMl => (dailyTargetMl - todayTotalConsumedMl).clamp(0, dailyTargetMl);
+
+  /// Human-friendly relative or clock timestamp for the last sip.
+  String get formattedLastSipTime {
+    if (lastSipTimestamp == null) return 'No sips yet today';
+    final now = DateTime.now();
+    final diff = now.difference(lastSipTimestamp!);
+    if (diff.inSeconds < 60) return 'Just now';
+    if (diff.inMinutes < 60) return '${diff.inMinutes}m ago';
+    final hour = lastSipTimestamp!.hour > 12
+        ? lastSipTimestamp!.hour - 12
+        : (lastSipTimestamp!.hour == 0 ? 12 : lastSipTimestamp!.hour);
+    final minute = lastSipTimestamp!.minute.toString().padLeft(2, '0');
+    final period = lastSipTimestamp!.hour >= 12 ? 'PM' : 'AM';
+    return '$hour:$minute $period';
+  }
+
   /// Creates a copy of this state with specified fields replaced.
   WaterBottleState copyWith({
     BottleConnectionStatus? connectionStatus,
@@ -60,6 +91,8 @@ class WaterBottleState {
     int? batteryPercent,
     int? lastSipAmount,
     int? todayTotalConsumedMl,
+    int? dailyTargetMl,
+    DateTime? lastSipTimestamp,
   }) {
     return WaterBottleState(
       connectionStatus: connectionStatus ?? this.connectionStatus,
@@ -68,6 +101,8 @@ class WaterBottleState {
       batteryPercent: batteryPercent ?? this.batteryPercent,
       lastSipAmount: lastSipAmount ?? this.lastSipAmount,
       todayTotalConsumedMl: todayTotalConsumedMl ?? this.todayTotalConsumedMl,
+      dailyTargetMl: dailyTargetMl ?? this.dailyTargetMl,
+      lastSipTimestamp: lastSipTimestamp ?? this.lastSipTimestamp,
     );
   }
 
@@ -81,7 +116,9 @@ class WaterBottleState {
           totalCapacityMl == other.totalCapacityMl &&
           batteryPercent == other.batteryPercent &&
           lastSipAmount == other.lastSipAmount &&
-          todayTotalConsumedMl == other.todayTotalConsumedMl;
+          todayTotalConsumedMl == other.todayTotalConsumedMl &&
+          dailyTargetMl == other.dailyTargetMl &&
+          lastSipTimestamp == other.lastSipTimestamp;
 
   @override
   int get hashCode => Object.hash(
@@ -91,11 +128,13 @@ class WaterBottleState {
         batteryPercent,
         lastSipAmount,
         todayTotalConsumedMl,
+        dailyTargetMl,
+        lastSipTimestamp,
       );
 
   @override
   String toString() =>
-      'WaterBottleState(status: ${connectionStatus.name}, volume: $currentVolumeMl/$totalCapacityMl mL, battery: $batteryPercent%, lastSip: $lastSipAmount mL, todayTotal: $todayTotalConsumedMl mL)';
+      'WaterBottleState(status: ${connectionStatus.name}, volume: $currentVolumeMl/$totalCapacityMl mL, battery: $batteryPercent%, lastSip: $lastSipAmount mL, todayTotal: $todayTotalConsumedMl/$dailyTargetMl mL, lastSipTime: $formattedLastSipTime)';
 }
 
 /// Robust [AsyncNotifier] managing the smart water bottle BLE subscription,
@@ -186,12 +225,14 @@ class WaterBottleNotifier extends AsyncNotifier<WaterBottleState> {
     final prevVolume = current.currentVolumeMl;
     int nextLastSip = current.lastSipAmount;
     int nextTodayTotal = current.todayTotalConsumedMl;
+    DateTime? nextTimestamp = current.lastSipTimestamp;
 
     if (newVolume < prevVolume) {
       final drop = prevVolume - newVolume;
       if (drop >= minSipThresholdMl) {
         nextLastSip = drop;
         nextTodayTotal += drop;
+        nextTimestamp = DateTime.now();
       }
     }
 
@@ -201,6 +242,7 @@ class WaterBottleNotifier extends AsyncNotifier<WaterBottleState> {
         batteryPercent: optionalBattery ?? current.batteryPercent,
         lastSipAmount: nextLastSip,
         todayTotalConsumedMl: nextTodayTotal,
+        lastSipTimestamp: nextTimestamp,
       ),
     );
   }
@@ -302,6 +344,7 @@ class WaterBottleNotifier extends AsyncNotifier<WaterBottleState> {
         currentVolumeMl: newVolume,
         lastSipAmount: amountMl,
         todayTotalConsumedMl: current.todayTotalConsumedMl + amountMl,
+        lastSipTimestamp: DateTime.now(),
       ),
     );
   }
