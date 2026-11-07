@@ -16,6 +16,10 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>H2O</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>H2O uses Bluetooth to pair with your smart bottle and track your hydration telemetry.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>H2O needs Bluetooth access to discover and sync with your smart bottle.</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
