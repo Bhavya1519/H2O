@@ -57,7 +57,7 @@ class BottleSettingsSheet extends StatelessWidget {
                   width: 44,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: AppColors.surface.withValues(alpha: 0.9),
+                    color: const Color(0xFFCBD5E1),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -206,7 +206,7 @@ class BottleSettingsSheet extends StatelessWidget {
                       child: Text(
                         service.isSterilizing ? 'Active' : 'Clean',
                         style: AppTypography.labelSmall.copyWith(
-                          color: AppColors.backgroundDark,
+                          color: Colors.white,
                           fontWeight: FontWeight.w700,
                         ),
                       ),

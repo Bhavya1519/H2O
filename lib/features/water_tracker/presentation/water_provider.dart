@@ -333,6 +333,18 @@ class WaterBottleNotifier extends AsyncNotifier<WaterBottleState> {
     );
   }
 
+  /// Sets connection status to connected with optional battery level and current volume.
+  void setConnected({int? battery, int? currentVolume}) {
+    final current = state.value ?? const WaterBottleState();
+    state = AsyncData(
+      current.copyWith(
+        connectionStatus: BottleConnectionStatus.connected,
+        batteryPercent: battery ?? current.batteryPercent,
+        currentVolumeMl: currentVolume ?? current.currentVolumeMl,
+      ),
+    );
+  }
+
   /// Manually simulates or records a consumed sip.
   void recordManualSip(int amountMl) {
     if (amountMl <= 0) return;

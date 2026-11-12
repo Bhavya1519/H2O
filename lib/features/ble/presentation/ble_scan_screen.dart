@@ -513,7 +513,7 @@ class _BleScanScreenState extends State<BleScanScreen>
                               height: 48,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(14),
-                                color: AppColors.surface,
+                                color: AppColors.surfaceSubtle,
                                 border: Border.all(color: AppColors.glassBorder),
                               ),
                               child: Icon(
@@ -702,7 +702,7 @@ class _BleScanScreenState extends State<BleScanScreen>
           width: 3.5,
           height: barHeight,
           decoration: BoxDecoration(
-            color: isActive ? AppColors.cyanAccent : AppColors.surface,
+            color: isActive ? AppColors.cyanAccent : const Color(0xFFCBD5E1),
             borderRadius: BorderRadius.circular(1.5),
           ),
         );

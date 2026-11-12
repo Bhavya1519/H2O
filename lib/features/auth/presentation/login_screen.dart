@@ -140,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: AppColors.cyanAccent,
                               ),
                               filled: true,
-                              fillColor: AppColors.surface.withValues(alpha: 0.5),
+                              fillColor: AppColors.surfaceSubtle,
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(14),
                                 borderSide: const BorderSide(
@@ -186,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                               ),
                               filled: true,
-                              fillColor: AppColors.surface.withValues(alpha: 0.5),
+                              fillColor: AppColors.surfaceSubtle,
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(14),
                                 borderSide: const BorderSide(

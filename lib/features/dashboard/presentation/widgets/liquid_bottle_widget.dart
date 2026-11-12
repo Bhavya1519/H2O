@@ -202,15 +202,15 @@ class _LiquidBottleWidgetState extends State<LiquidBottleWidget>
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
-                color: AppColors.backgroundDark.withValues(alpha: 0.78),
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                  color: AppColors.glassBorderCyan,
+                  color: AppColors.azureAccent.withValues(alpha: 0.25),
                   width: 1.2,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.5),
+                    color: AppColors.backgroundDark.withValues(alpha: 0.10),
                     blurRadius: 16,
                     offset: const Offset(0, 4),
                   ),
@@ -230,7 +230,7 @@ class _LiquidBottleWidgetState extends State<LiquidBottleWidget>
                         style: AppTypography.displaySmall.copyWith(
                           fontSize: 26,
                           fontWeight: FontWeight.w800,
-                          color: Colors.white,
+                          color: AppColors.textPrimary,
                           letterSpacing: -0.5,
                         ),
                       ),
@@ -238,7 +238,7 @@ class _LiquidBottleWidgetState extends State<LiquidBottleWidget>
                       Text(
                         'mL',
                         style: AppTypography.labelSmall.copyWith(
-                          color: AppColors.skyHighlight,
+                          color: AppColors.azureAccent,
                           fontWeight: FontWeight.w700,
                           fontSize: 12,
                         ),
@@ -269,12 +269,18 @@ class _LiquidBottleWidgetState extends State<LiquidBottleWidget>
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
-                  color: AppColors.surface.withValues(alpha: 0.8),
+                  color: Colors.white.withValues(alpha: 0.95),
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
-                    color: AppColors.glassBorder,
+                    color: AppColors.azureAccent.withValues(alpha: 0.2),
                     width: 0.8,
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.backgroundDark.withValues(alpha: 0.08),
+                      blurRadius: 8,
+                    ),
+                  ],
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -282,14 +288,14 @@ class _LiquidBottleWidgetState extends State<LiquidBottleWidget>
                     const Icon(
                       Icons.touch_app_rounded,
                       size: 11,
-                      color: AppColors.cyanAccent,
+                      color: AppColors.azureAccent,
                     ),
                     const SizedBox(width: 4),
                     Text(
                       'TAP TO SIP (-50mL)',
                       style: AppTypography.labelSmall.copyWith(
                         fontSize: 8.5,
-                        color: AppColors.textSecondary,
+                        color: AppColors.textPrimary,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -420,8 +426,8 @@ class _BottlePainter extends CustomPainter {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            AppColors.azureAccent.withValues(alpha: 0.55),
-            AppColors.backgroundDark.withValues(alpha: 0.9),
+            AppColors.azureAccent.withValues(alpha: 0.45),
+            AppColors.darkBlue.withValues(alpha: 0.75),
           ],
         ).createShader(Rect.fromLTWH(0, waterLevelY, w, h - waterLevelY));
 
@@ -447,8 +453,8 @@ class _BottlePainter extends CustomPainter {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            AppColors.skyHighlight.withValues(alpha: 0.88),
-            AppColors.cyanAccent.withValues(alpha: 0.90),
+            AppColors.skyHighlight.withValues(alpha: 0.92),
+            AppColors.cyanAccent.withValues(alpha: 0.92),
             AppColors.azureAccent.withValues(alpha: 0.96),
           ],
           stops: const [0.0, 0.35, 1.0],
@@ -464,10 +470,10 @@ class _BottlePainter extends CustomPainter {
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
           colors: [
-            Colors.white.withValues(alpha: 0.2),
-            Colors.white.withValues(alpha: 0.95),
-            AppColors.skyHighlight,
             Colors.white.withValues(alpha: 0.3),
+            Colors.white.withValues(alpha: 0.98),
+            AppColors.skyHighlight,
+            Colors.white.withValues(alpha: 0.4),
           ],
         ).createShader(Rect.fromLTWH(0, waterLevelY - amplitude, w, amplitude * 2));
 
@@ -494,8 +500,8 @@ class _BottlePainter extends CustomPainter {
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
         colors: [
-          Colors.white.withValues(alpha: 0.07),
-          Colors.white.withValues(alpha: 0.02),
+          Colors.white.withValues(alpha: 0.70),
+          const Color(0xFFEFF6FF).withValues(alpha: 0.40),
         ],
       ).createShader(Rect.fromLTWH(0, 0, w, h));
     canvas.drawPath(interiorPath, glassFillPaint);
@@ -508,10 +514,10 @@ class _BottlePainter extends CustomPainter {
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [
-          Colors.white.withValues(alpha: 0.65),
+          AppColors.primaryBlue.withValues(alpha: 0.60),
           AppColors.glassBorderCyan,
           AppColors.glassBorder,
-          Colors.white.withValues(alpha: 0.4),
+          AppColors.primaryBlue.withValues(alpha: 0.35),
         ],
         stops: const [0.0, 0.3, 0.7, 1.0],
       ).createShader(Rect.fromLTWH(0, 0, w, h));
@@ -531,7 +537,7 @@ class _BottlePainter extends CustomPainter {
         end: Alignment.bottomCenter,
         colors: [
           Colors.white.withValues(alpha: 0.0),
-          Colors.white.withValues(alpha: 0.45),
+          Colors.white.withValues(alpha: 0.75),
           Colors.white.withValues(alpha: 0.0),
         ],
       ).createShader(Rect.fromLTWH(0, bodyTop, w, bodyBottom - bodyTop));
@@ -547,16 +553,16 @@ class _BottlePainter extends CustomPainter {
       const Radius.circular(8),
     );
 
-    // Cap Gradient
+    // Cap Gradient (Royal Navy & Dark Blue)
     final capPaint = Paint()
       ..style = PaintingStyle.fill
       ..shader = const LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
         colors: [
-          Color(0xFF334155),
-          Color(0xFF1E293B),
-          Color(0xFF0F172A),
+          Color(0xFF1E3A8A), // Royal navy blue
+          Color(0xFF172554), // Midnight blue
+          Color(0xFF0F172A), // Dark blue base
         ],
       ).createShader(capRect.outerRect);
     canvas.drawRRect(capRect, capPaint);

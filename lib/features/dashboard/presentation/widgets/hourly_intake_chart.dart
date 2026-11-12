@@ -113,8 +113,8 @@ class HourlyIntakeChart extends StatelessWidget {
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                                 colors: [
-                                  AppColors.azureAccent.withValues(alpha: 0.7),
-                                  AppColors.surface.withValues(alpha: 0.8),
+                                  AppColors.primaryBlue.withValues(alpha: 0.6),
+                                  const Color(0xFFE2E8F0),
                                 ],
                               ),
                         boxShadow: isPeak

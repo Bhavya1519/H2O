@@ -625,7 +625,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
                       style: AppTypography.titleLarge.copyWith(
                         fontSize: 22,
                         fontWeight: FontWeight.w800,
-                        color: Colors.white,
+                        color: AppColors.textPrimary,
                         letterSpacing: -0.5,
                       ),
                     ),
@@ -648,7 +648,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
                     children: [
                       Container(
                         height: 6,
-                        color: Colors.white.withValues(alpha: 0.08),
+                        color: const Color(0xFFE2E8F0),
                       ),
                       TweenAnimationBuilder<double>(
                         tween: Tween<double>(
@@ -745,7 +745,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
                   style: AppTypography.titleMedium.copyWith(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
-                    color: Colors.white,
+                    color: AppColors.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -879,26 +879,26 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: AppColors.surface.withValues(alpha: 0.65),
+          color: Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: AppColors.glassBorder),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.2),
-              blurRadius: 8,
-              offset: const Offset(0, 3),
+              color: const Color(0xFF0F172A).withValues(alpha: 0.06),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
             ),
           ],
         ),
         child: Column(
           children: [
-            Icon(icon, color: AppColors.cyanAccent, size: 22),
+            Icon(icon, color: AppColors.primaryBlue, size: 22),
             const SizedBox(height: 6),
             Text(
               '+$amount',
               style: AppTypography.bodySmall.copyWith(
                 fontWeight: FontWeight.w700,
-                color: Colors.white,
+                color: AppColors.textPrimary,
               ),
             ),
             Text(
