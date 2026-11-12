@@ -52,7 +52,7 @@ void main() {
     expect(find.text('800'), findsOneWidget); // current bottle volume in center badge
 
     // 3. Verify Sleek Horizontal Metric Card under the bottle
-    expect(find.text('DAILY TARGET PROGRESS'), findsOneWidget);
+    expect(find.text('DAILY TARGET'), findsOneWidget);
     expect(find.text('1450'), findsAtLeastNWidgets(1));
     expect(find.text(' / 2500 mL'), findsOneWidget);
     expect(find.text('LAST SIP'), findsOneWidget);

@@ -261,12 +261,17 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    _showBottleView ? 'SMART BOTTLE LEVEL' : 'CIRCULAR GAUGE',
-                                    style: AppTypography.metricCaption.copyWith(
-                                      color: AppColors.textCyanHighlight,
+                                  Expanded(
+                                    child: Text(
+                                      _showBottleView ? 'SMART BOTTLE LEVEL' : 'CIRCULAR GAUGE',
+                                      style: AppTypography.metricCaption.copyWith(
+                                        color: AppColors.textCyanHighlight,
+                                        fontSize: 11,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
+                                  const SizedBox(width: 8),
                                   _buildViewSwitcher(),
                                 ],
                               ),
@@ -595,22 +600,25 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
                     Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: AppColors.cyanAccent.withValues(alpha: 0.15),
+                        color: AppColors.primaryBlue.withValues(alpha: 0.12),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
                         Icons.water_drop_rounded,
-                        color: AppColors.cyanAccent,
+                        color: AppColors.primaryBlue,
                         size: 13,
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    Text(
-                      'DAILY TARGET PROGRESS',
-                      style: AppTypography.metricCaption.copyWith(
-                        fontSize: 9.5,
-                        color: AppColors.textCyanHighlight,
-                        letterSpacing: 0.8,
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        'DAILY TARGET',
+                        style: AppTypography.metricCaption.copyWith(
+                          fontSize: 9.5,
+                          color: AppColors.textCyanHighlight,
+                          letterSpacing: 0.8,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
@@ -799,21 +807,21 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
   Widget _buildViewSwitcher() {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.surface.withValues(alpha: 0.6),
+        color: AppColors.surfaceSubtle,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: AppColors.glassBorder),
       ),
-      padding: const EdgeInsets.all(3),
+      padding: const EdgeInsets.all(2.5),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           GestureDetector(
             onTap: () => setState(() => _showBottleView = false),
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
                 color: !_showBottleView
-                    ? AppColors.cyanAccent.withValues(alpha: 0.25)
+                    ? AppColors.primaryBlue
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(16),
               ),
@@ -822,14 +830,14 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
                   Icon(
                     Icons.donut_large_rounded,
                     size: 13,
-                    color: !_showBottleView ? AppColors.cyanAccent : AppColors.textMuted,
+                    color: !_showBottleView ? Colors.white : AppColors.textMuted,
                   ),
                   const SizedBox(width: 4),
                   Text(
                     'Gauge',
                     style: AppTypography.labelSmall.copyWith(
-                      fontSize: 11,
-                      color: !_showBottleView ? Colors.white : AppColors.textMuted,
+                      fontSize: 10.5,
+                      color: !_showBottleView ? Colors.white : AppColors.textSecondary,
                       fontWeight: !_showBottleView ? FontWeight.w700 : FontWeight.normal,
                     ),
                   ),
@@ -840,10 +848,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
           GestureDetector(
             onTap: () => setState(() => _showBottleView = true),
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
                 color: _showBottleView
-                    ? AppColors.cyanAccent.withValues(alpha: 0.25)
+                    ? AppColors.primaryBlue
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(16),
               ),
@@ -852,14 +860,14 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
                   Icon(
                     Icons.local_drink_rounded,
                     size: 13,
-                    color: _showBottleView ? AppColors.cyanAccent : AppColors.textMuted,
+                    color: _showBottleView ? Colors.white : AppColors.textMuted,
                   ),
                   const SizedBox(width: 4),
                   Text(
                     'Bottle',
                     style: AppTypography.labelSmall.copyWith(
-                      fontSize: 11,
-                      color: _showBottleView ? Colors.white : AppColors.textMuted,
+                      fontSize: 10.5,
+                      color: _showBottleView ? Colors.white : AppColors.textSecondary,
                       fontWeight: _showBottleView ? FontWeight.w700 : FontWeight.normal,
                     ),
                   ),
