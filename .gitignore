@@ -46,3 +46,13 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Release and Build Binaries
+release/
+*.apk
+*.aab
+*.ipa
+
+# Editor & workspace settings
+.vscode/
+
